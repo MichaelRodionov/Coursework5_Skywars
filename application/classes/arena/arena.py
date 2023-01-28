@@ -22,19 +22,19 @@ class BaseArena(type):
 # concrete class Arena
 class Arena(metaclass=BaseArena):
     STAMINA_PER_ROUND = 1
-    hero = None
+    player = None
     enemy = None
     game_is_running = False
     battle_result = ''
 
-    def start_game(self, hero: BaseUnit, enemy: BaseUnit) -> None:
+    def start_game(self, player: BaseUnit, enemy: BaseUnit) -> None:
         """
         Method to start fight
-        :param hero: hero unit
+        :param player: hero unit
         :param enemy: enemy unit
         :return: None
         """
-        self.hero: BaseUnit = hero
+        self.player: BaseUnit = player
         self.enemy: BaseUnit = enemy
         self.game_is_running: bool = True
 
@@ -43,16 +43,16 @@ class Arena(metaclass=BaseArena):
         Method to check unit's hp
         :return: None or string result of game
         """
-        if self.hero.hp > 0 and self.enemy.hp > 0:
+        if self.player.hp > 0 and self.enemy.hp > 0:
             return None
 
-        if self.hero.hp > 0 and self.enemy.hp <= 0:
+        if self.player.hp > 0 and self.enemy.hp <= 0:
             self.battle_result = 'Игрок выиграл битву'
 
-        elif self.hero.hp <= 0 and self.enemy.hp <= 0:
+        elif self.player.hp <= 0 and self.enemy.hp <= 0:
             self.battle_result = 'Ничья!'
 
-        elif self.hero.hp <= 0 and self.enemy.hp > 0:
+        elif self.player.hp <= 0 and self.enemy.hp > 0:
             self.battle_result = f'Противник выиграл битву'
         return self._end_game()
 
@@ -61,7 +61,7 @@ class Arena(metaclass=BaseArena):
         Method to count unit's stamina regeneration
         :return: None
         """
-        units: tuple[BaseUnit, BaseUnit] = (self.hero, self.enemy)
+        units: tuple[BaseUnit, BaseUnit] = (self.player, self.enemy)
         for unit in units:
             if unit.stamina + self.STAMINA_PER_ROUND > unit.unit_class.max_stamina:
                 unit.stamina = unit.unit_class.max_stamina
@@ -78,7 +78,7 @@ class Arena(metaclass=BaseArena):
             return result
         if self.game_is_running:
             self._stamina_regeneration()
-            return self.enemy.hit(self.hero)
+            return self.enemy.hit(self.player)
 
     def _end_game(self) -> str:
         """
@@ -94,7 +94,7 @@ class Arena(metaclass=BaseArena):
         Method to hit a unit
         :return: string result
         """
-        result: Any = self.hero.hit(self.enemy)
+        result: Any = self.player.hit(self.enemy)
         next_turn: str = self.next_turn()
         return f'{result}\n{next_turn}'
 
@@ -103,6 +103,6 @@ class Arena(metaclass=BaseArena):
         Method to use unit's skill
         :return: string result
         """
-        result: str = self.hero.use_skill(self.enemy)
+        result: str = self.player.use_skill(self.enemy)
         next_turn: str = self.next_turn()
         return f'{result}\n{next_turn}'
