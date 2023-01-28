@@ -163,8 +163,10 @@ class PlayerUnit(BaseUnit):
         if self.stamina > self.weapon.stamina_per_hit:
             damage: float = self._count_damage(target)
             if damage == 0:
-                return f"{self.name} используя {self.weapon.name} наносит удар, но {target.armor.name} cоперника его останавливает."
-            return f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} соперника и наносит {damage} урона."
+                return f"{self.name} используя {self.weapon.name} наносит удар, " \
+                       f"но {target.armor.name} cоперника его останавливает."
+            return f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} соперника и " \
+                   f"наносит {damage} урона."
         return f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
 
 
@@ -183,6 +185,8 @@ class EnemyUnit(BaseUnit):
         if self.stamina > self.weapon.stamina_per_hit:
             damage: float = self._count_damage(target)
             if damage == 0:
-                return f"{self.name} используя {self.weapon.name} наносит Вам удар, но Ваш {target.armor.name} его останавливает."
-            return f"{self.name} используя {self.weapon.name} пробивает Ваш {target.armor.name} и наносит Вам {damage} урона."
+                return f"{self.name} используя {self.weapon.name} наносит Вам удар, " \
+                       f"но Ваш {target.armor.name} его останавливает."
+            return f"{self.name} используя {self.weapon.name} пробивает Ваш {target.armor.name} и " \
+                   f"наносит Вам {damage} урона."
         return f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
