@@ -84,7 +84,7 @@ def start_fight():
     View to start game and render fight page
     :return: rendered fight page
     """
-    arena.start_game(player=heroes['player'], enemy=heroes['enemy'])
+    arena.start_game(hero=heroes['player'], enemy=heroes['enemy'])
     return render_template('fight.html', title='fight', heroes=heroes)
 
 
