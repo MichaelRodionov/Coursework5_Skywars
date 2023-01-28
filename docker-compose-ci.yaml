@@ -4,5 +4,6 @@ services:
   app:
     image: michaelrodionov/skywars:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     command: gunicorn -b 0.0.0.0:80 app:app
+    restart: always
     ports:
       - 80:80
