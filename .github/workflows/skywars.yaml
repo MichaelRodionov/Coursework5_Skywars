@@ -1,7 +1,7 @@
 name: skywars workflow
 on: [push]
 jobs:
-  clone_lint_build_push:
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: clone code
