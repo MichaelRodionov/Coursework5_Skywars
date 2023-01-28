@@ -9,10 +9,7 @@ from implemented import unit_classes, equipment, arena
 # ----------------------------------------------------------------
 # initialize application and register blueprints
 app = Flask(__name__)
-heroes = {
-    'player': ...,
-    'enemy': ...,
-}
+heroes = {}
 # app.register_blueprint(warrior_blueprint)
 # app.register_blueprint(arena_blueprint)
 # app.register_blueprint(menu_blueprint)
