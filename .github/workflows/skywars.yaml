@@ -40,3 +40,4 @@ jobs:
           script: |
             cd skywars_app_ci
             echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
+
