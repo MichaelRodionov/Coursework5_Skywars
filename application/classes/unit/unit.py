@@ -83,7 +83,7 @@ class BaseUnit(ABC):
 
     def equip_armor(self, armor: Armor) -> str:
         """
-        Equip hero with a armor
+        Equip hero with an armor
         :param armor: object of class Armor
         :return: result of method - str
         """
@@ -114,7 +114,7 @@ class BaseUnit(ABC):
             damage: float = 0
         return damage
 
-    def get_damage(self, damage: int) -> Optional[int]:
+    def get_damage(self, damage: float) -> Optional[float]:
         """
         Method to count received damage
         :param damage: damage value

@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-from application.classes.unit.unit import BaseUnit
-
 
 # ----------------------------------------------------------------
 # abstract class Skill
@@ -49,7 +47,7 @@ class Skill(ABC):
         Method to count if unit's stamina is enough to use his skill
         :return: bool value
         """
-        return self.user.stamina > self.stamina
+        return self.user.stamina >= self.stamina
 
     def use(self, user, target) -> str:
         """
@@ -58,8 +56,8 @@ class Skill(ABC):
         :param target: enemy unit
         :return:
         """
-        self.user: BaseUnit = user
-        self.target: BaseUnit = target
+        self.user = user
+        self.target = target
 
         if self._is_stamina_enough:
             return self.skill_effect()
@@ -77,6 +75,10 @@ class FuryPunch(Skill):
     damage = 12.0
 
     def skill_effect(self) -> str:
+        """
+        Method of skill effect
+        :return: string result of using skill
+        """
         self.user.stamina -= self.stamina
         self.target.hp -= self.damage
         return f"{self.user.name} использует {self.name} и наносит {self.damage} урона."
