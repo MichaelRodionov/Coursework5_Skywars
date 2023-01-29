@@ -94,15 +94,21 @@ class Arena(metaclass=BaseArena):
         Method to hit a unit
         :return: string result
         """
-        result: Any = self.player.hit(self.enemy)
-        next_turn: str = self.next_turn()
-        return f'{result}\n{next_turn}'
+        result: Optional[str] = self._check_players_hp()
+        if not result:
+            result: Any = self.player.hit(self.enemy)
+            next_turn: str = self.next_turn()
+            return f'{result}\n{next_turn}'
+        return result
 
     def player_use_skill(self) -> str:
         """
         Method to use unit's skill
         :return: string result
         """
-        result: str = self.player.use_skill(self.enemy)
-        next_turn: str = self.next_turn()
-        return f'{result}\n{next_turn}'
+        result = self._check_players_hp()
+        if not result:
+            result: str = self.player.use_skill(self.enemy)
+            next_turn: str = self.next_turn()
+            return f'{result}\n{next_turn}'
+        return result
